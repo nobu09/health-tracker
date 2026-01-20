@@ -1,0 +1,19 @@
+# Dockerfile.dev
+FROM ruby:4.0.0
+
+WORKDIR /rails
+
+# Install packages needed to build gems
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y build-essential git libyaml-dev pkg-config && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
+# Gemfile をコピーして、bundle install を実行
+COPY Gemfile* ./
+RUN bundle install
+
+# アプリケーションコードをコピー
+COPY . .
+
+# 開発サーバー起動
+CMD ["rails", "server", "-b", "0.0.0.0"]
