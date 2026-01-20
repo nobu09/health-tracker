@@ -19,5 +19,8 @@ RUN bundle install
 # アプリケーションコードをコピー
 COPY . .
 
+# 3000ポートを公開
+EXPOSE 3000
+
 # 開発サーバー起動
 CMD ["rails", "server", "-b", "0.0.0.0"]
