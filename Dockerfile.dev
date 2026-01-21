@@ -1,4 +1,4 @@
-# Dockerfile.dev
+# Dockerfile.dev Rails バックエンド
 FROM ruby:4.0.0
 
 # 作業ディレクトリの設定
