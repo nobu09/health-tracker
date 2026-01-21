@@ -2,7 +2,7 @@
 FROM ruby:4.0.0
 
 # 作業ディレクトリの設定
-WORKDIR /rails
+WORKDIR /app
 
 # パッケージのインストール
 RUN apt-get update -qq && \
