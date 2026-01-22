@@ -3,8 +3,22 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - bundle_cache:/usr/local/bundle
 
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile.dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - node_modules:/app/node_modules
+
+volumes:
+  bundle_cache:
+  node_modules:
