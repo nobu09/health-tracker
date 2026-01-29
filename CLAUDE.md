@@ -1,63 +1,63 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+このファイルは、Claude Code (claude.ai/code) がこのリポジトリで作業する際のガイダンスを提供します。
 
-## Development Commands
+## 開発コマンド
 
-### Setup & Running
+### セットアップと起動
 ```bash
-bin/setup                        # Install dependencies & prepare database
-bin/dev                          # Start Rails server
-docker-compose up                # Run backend (port 3000) & frontend (port 5173)
+bin/setup                        # 依存関係のインストールとデータベースの準備
+bin/dev                          # Railsサーバーを起動
+docker-compose up                # バックエンド(ポート3000)とフロントエンド(ポート5173)を起動
 ```
 
-### Backend (Rails)
+### バックエンド (Rails)
 ```bash
-bin/rails server                 # Start development server
-bin/rails db:prepare             # Create/migrate database
-bin/rails test                   # Run unit/integration tests
-bin/rails test:system            # Run system tests (Capybara + Selenium)
-bin/rails test test/models/user_test.rb              # Run single test file
-bin/rails test test/models/user_test.rb:10           # Run single test at line
+bin/rails server                 # 開発サーバーを起動
+bin/rails db:prepare             # データベースの作成/マイグレーション
+bin/rails test                   # ユニット/インテグレーションテストを実行
+bin/rails test:system            # システムテストを実行 (Capybara + Selenium)
+bin/rails test test/models/user_test.rb              # 単一のテストファイルを実行
+bin/rails test test/models/user_test.rb:10           # 特定の行のテストを実行
 ```
 
-### Frontend (React)
+### フロントエンド (React)
 ```bash
-cd frontend && npm install       # Install dependencies
-npm run dev                      # Start Vite dev server
-npm run build                    # Build for production
-npm run lint                     # Run ESLint
+cd frontend && npm install       # 依存関係のインストール
+npm run dev                      # Vite開発サーバーを起動
+npm run build                    # 本番用ビルド
+npm run lint                     # ESLintを実行
 ```
 
-### Quality & Security
+### 品質とセキュリティ
 ```bash
-bin/rubocop                      # Lint Ruby code
-bin/brakeman                     # Security analysis
-bin/bundler-audit                # Audit gems for vulnerabilities
-bin/ci                           # Run full CI pipeline locally
+bin/rubocop                      # Rubyコードのリント
+bin/brakeman                     # セキュリティ分析
+bin/bundler-audit                # gemの脆弱性監査
+bin/ci                           # CIパイプラインをローカルで実行
 ```
 
-## Architecture
+## アーキテクチャ
 
-### Tech Stack
-- **Backend**: Rails 8.1, Ruby 4.0, SQLite3
-- **API**: GraphQL-only (graphql-ruby with Dataloader)
-- **Frontend**: React 19 + TypeScript + Vite + Tailwind CSS (in `/frontend`)
-- **Background Jobs**: Solid Queue, Solid Cache, Solid Cable
+### 技術スタック
+- **バックエンド**: Rails 8.1, Ruby 4.0, SQLite3
+- **API**: GraphQLのみ (graphql-ruby + Dataloader)
+- **フロントエンド**: React 19 + TypeScript + Vite + Tailwind CSS (`/frontend`に配置)
+- **バックグラウンドジョブ**: Solid Queue, Solid Cache, Solid Cable
 
-### API Design
-- Single `/graphql` endpoint (POST)
-- GraphiQL available at `/graphiql` in development
-- Relay-style object identification with GlobalID
-- Dataloader for batch-loading (N+1 prevention)
+### API設計
+- 単一の `/graphql` エンドポイント (POST)
+- 開発環境では `/graphiql` でGraphiQLが利用可能
+- GlobalIDを使用したRelay形式のオブジェクト識別
+- N+1問題防止のためのDataloader
 
-### Project Structure
-- `/app/graphql/` - GraphQL schema, types, mutations, resolvers
-- `/frontend/` - Separate React SPA (communicates via GraphQL)
-- `/config/ci.rb` - CI pipeline configuration
+### プロジェクト構成
+- `/app/graphql/` - GraphQLスキーマ、型、ミューテーション、リゾルバ
+- `/frontend/` - 独立したReact SPA (GraphQL経由で通信)
+- `/config/ci.rb` - CIパイプライン設定
 
-### Key Files
-- `app/graphql/health_tracker_schema.rb` - GraphQL schema definition
-- `app/graphql/types/query_type.rb` - Query types
-- `app/graphql/types/mutation_type.rb` - Mutations
-- `config/routes.rb` - Routes (minimal: GraphQL endpoint + health check)
+### 主要ファイル
+- `app/graphql/health_tracker_schema.rb` - GraphQLスキーマ定義
+- `app/graphql/types/query_type.rb` - クエリ型
+- `app/graphql/types/mutation_type.rb` - ミューテーション
+- `config/routes.rb` - ルーティング (最小限: GraphQLエンドポイント + ヘルスチェック)
