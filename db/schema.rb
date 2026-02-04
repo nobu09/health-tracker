@@ -10,5 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 0) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_04_105455) do
+  create_table "users", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "human_id"
+    t.datetime "updated_at", null: false
+    t.index ["human_id"], name: "index_users_on_human_id", unique: true
+  end
 end
