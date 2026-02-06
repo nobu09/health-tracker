@@ -24,6 +24,10 @@
   </head>
 
   <body>
+    <%# devise の設定で必要だったのでメッセージ表示を追加した %>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+
     <%= yield %>
   </body>
 </html>

@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  # TODO: root の定義が devise の設定で必要なので、適した controllersを作成したら変更してコメントアウト外す
+  #root to: "/home/index"
+
   # GraphiQL https://github.com/rmosolgo/graphiql-rails
   if Rails.env.development?
     mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
