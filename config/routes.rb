@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   # TODO: root の定義が devise の設定で必要なので、適した controllersを作成したら変更してコメントアウト外す
   # root to: "/home/index"
 
